@@ -27,7 +27,6 @@ class HashMap {
         // if the loadRatio is greater than the HashMap.MAX_LOAD_RATIO
         // resize to capacity * HashMap.SIZE_RATIO 
         if (loadRatio > this.MAX_LOAD_RATIO) {
-            console.log(this.SIZE_RATIO)
             this._resize(this._capacity * this.SIZE_RATIO)
         }
         
@@ -61,13 +60,12 @@ class HashMap {
             const slot = this._hashTable[index]
             // if the index is empty or if it has the same key but
             // that key isn't marked as deleted, then stop loop and return index
-            if (!slot || (slot.key === key && !slot.DELETED)) { return index }
+            if (slot === undefined || (slot.key === key && !slot.DELETED)) { return index }
         }
     }
 
     // recreate hashTable to a larger size
     _resize(size) {
-        console.log('here', size)
         // copy current hashTable slots to oldSlots
         const oldSlots = this._hashTable
         // define capacity from the size arg
